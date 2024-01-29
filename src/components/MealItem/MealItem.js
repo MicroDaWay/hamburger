@@ -12,7 +12,7 @@ const MealItem = (props) => {
         <div className={classes.desc}>{props.item.desc}</div>
         <div className={classes['price-count']}>
           <span className={classes.price}>{props.item.price}</span>
-          <Counter item={props.item} onAddCart={props.onAddCart} onSubCart={props.onSubCart} />
+          <Counter item={props.item} />
         </div>
       </div>
     </div>
