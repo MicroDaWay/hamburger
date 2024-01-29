@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
+import A from './components/Test/A'
+import B from './components/Test/B'
+import TestContext from './store/TestContext'
 
 // 商品数据
 const MEAL_DATA = [
@@ -94,6 +97,12 @@ const App = () => {
 
   return (
     <>
+      <TestContext.Provider value={{ name: '猪八戒', age: 28 }}>
+        <A />
+      </TestContext.Provider>
+      {/* <TestContext.Provider value={{ name: '沙和尚', age: 38 }}> */}
+      <B />
+      {/* </TestContext.Provider> */}
       <Search />
       <Meal mealData={mealData} onAddCart={addCart} onSubCart={subCart} />
     </>
