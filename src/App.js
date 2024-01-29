@@ -1,5 +1,13 @@
+import Meal from './components/Meal/Meal'
+import Search from './components/Search/Search'
+
 const App = () => {
-  return <div>App</div>
+  return (
+    <>
+      <Search />
+      <Meal />
+    </>
+  )
 }
 
 export default App

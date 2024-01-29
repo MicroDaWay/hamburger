@@ -1,0 +1,34 @@
+.meal-item {
+  display: flex;
+  padding: 10rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.img-box {
+  flex-shrink: 0;
+  width: 250rem;
+}
+
+.meal-name {
+  font-size: 36rem;
+}
+
+.desc {
+  color: #aeaeae;
+}
+
+.price-count {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rem;
+}
+
+.price {
+  font-size: 36rem;
+  font-weight: bold;
+}
+
+.price::before {
+  content: '￥';
+  font-size: 26rem;
+}
