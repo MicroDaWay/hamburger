@@ -1,19 +1,10 @@
 import MealItem from '../MealItem/MealItem'
 import classes from './Meal.module.css'
 
-const Meal = () => {
-  return (
-    <div className={classes.meal}>
-      <MealItem />
-      <MealItem />
-      <MealItem />
-      <MealItem />
-      <MealItem />
-      <MealItem />
-      <MealItem />
-      <MealItem />
-    </div>
-  )
+const Meal = (props) => {
+  const mealsItem = props.mealsData.map((item) => <MealItem item={item} key={item.id} />)
+
+  return <div className={classes.meal}>{mealsItem}</div>
 }
 
 export default Meal
