@@ -2,7 +2,8 @@ import { useState } from 'react'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
 
-const MEALS_DATA = [
+// 商品数据
+const MEAL_DATA = [
   {
     id: '1',
     title: '汉堡包',
@@ -55,12 +56,46 @@ const MEALS_DATA = [
 ]
 
 const App = () => {
-  const [mealsData, setMealsData] = useState(MEALS_DATA)
+  // 商品数据
+  const [mealData, setMealData] = useState(MEAL_DATA)
+
+  // 购物车数据
+  const [cartData, setCartData] = useState({
+    cart: [],
+    totalAmount: 0,
+    totalPrice: 0,
+  })
+
+  // 向购物车中添加商品
+  const addCart = (newItem) => {
+    const newCart = { ...cartData }
+    const item = newCart.cart.find((item) => item.id === newItem.id)
+    if (!item) {
+      newItem.amount = 0
+      newCart.cart.push(newItem)
+    }
+    newItem.amount++
+    newCart.totalAmount += 1
+    newCart.totalPrice += newItem.price
+    setCartData(newCart)
+  }
+
+  // 从购物车中移除商品
+  const subCart = (newItem) => {
+    const newCart = { ...cartData }
+    newItem.amount--
+    if (newItem.amount <= 0) {
+      newCart.cart = newCart.cart.filter((item) => item.id !== newItem.id)
+    }
+    newCart.totalAmount -= 1
+    newCart.totalPrice -= newItem.price
+    setCartData(newCart)
+  }
 
   return (
     <>
       <Search />
-      <Meal mealsData={mealsData} />
+      <Meal mealData={mealData} onAddCart={addCart} onSubCart={subCart} />
     </>
   )
 }
