@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext, useState } from 'react'
 import CartContext from '../../store/CartContext'
 import Backdrop from '../Backdrop/Backdrop'
+import ConfirmModal from '../ConfirmModal/ConfirmModal'
 import MealItem from '../MealItem/MealItem'
 import classes from './CartDetails.module.css'
-import ConfirmModal from '../ConfirmModal/ConfirmModal'
 
-const CartDetails = () => {
+const CartDetails = (props) => {
   // 控制是否显示清空购物车的确认框
   const [showConfirmModal, setConfirmModal] = useState(false)
+
   const cartContext = useContext(CartContext)
 
   const mealItem = cartContext.cart.map((item) => (
@@ -25,6 +26,7 @@ const CartDetails = () => {
   const confirmHandler = () => {
     cartContext.clearCart()
     setConfirmModal(false)
+    props.onHideCartDetails()
   }
 
   // 点击清空购物车按钮的处理函数

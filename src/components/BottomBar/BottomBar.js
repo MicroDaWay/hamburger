@@ -4,14 +4,30 @@ import { useContext, useState } from 'react'
 import CartContext from '../../store/CartContext'
 import CartDetails from '../CartDetails/CartDetails'
 
-const BottomBar = () => {
+const BottomBar = (props) => {
   // 是否显示购物车详情
   const [showCartDetails, setShowCartDetails] = useState(false)
   const cartContext = useContext(CartContext)
 
+  // 是否显示购物车详情
   const clickBottomBar = () => {
+    if (!cartContext.totalAmount) {
+      setShowCartDetails(false)
+      return
+    }
+    setShowCartDetails((prevState) => !prevState)
+  }
+
+  // 隐藏购物车详情
+  const hideCartDetailsHandler = () => {
+    setShowCartDetails(false)
+  }
+
+  // 点击去结算的处理函数
+  const checkoutHandler = (e) => {
+    e.stopPropagation()
     if (cartContext.totalAmount) {
-      setShowCartDetails((prevState) => !prevState)
+      props.onShowCheckout()
     }
   }
 
@@ -28,10 +44,13 @@ const BottomBar = () => {
       ) : (
         <div className={classes['no-meal']}>未选购商品</div>
       )}
-      <div className={cartContext.totalPrice ? classes['checkout'] : classes['no-checkout']}>
+      <div
+        onClick={checkoutHandler}
+        className={cartContext.totalPrice ? classes['checkout'] : classes['no-checkout']}
+      >
         去结算
       </div>
-      {showCartDetails ? <CartDetails /> : null}
+      {showCartDetails ? <CartDetails onHideCartDetails={hideCartDetailsHandler} /> : null}
     </div>
   )
 }

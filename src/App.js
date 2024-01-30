@@ -3,6 +3,7 @@ import BottomBar from './components/BottomBar/BottomBar'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
 import CartContext from './store/CartContext'
+import Checkout from './components/Checkout/Checkout'
 
 // 商品数据
 const MEAL_DATA = [
@@ -68,6 +69,19 @@ const App = () => {
     totalPrice: 0,
   })
 
+  // 是否显示结算页
+  const [showCheckout, setShowCheckout] = useState(false)
+
+  // 显示结算页
+  const showCheckoutHandler = () => {
+    setShowCheckout(true)
+  }
+
+  // 隐藏结算页
+  const hideCheckoutHandler = () => {
+    setShowCheckout(false)
+  }
+
   // 搜索框过滤数据
   const filterData = (keyword) => {
     const newMealData = MEAL_DATA.filter(
@@ -104,18 +118,20 @@ const App = () => {
 
   // 清空购物车
   const clearCart = () => {
-    setCartData({
-      cart: [],
-      totalAmount: 0,
-      totalPrice: 0,
-    })
+    const newCart = { ...cartData }
+    newCart.cart.forEach((item) => (item.amount = 0))
+    newCart.cart = []
+    newCart.totalAmount = 0
+    newCart.totalPrice = 0
+    setCartData(newCart)
   }
 
   return (
     <CartContext.Provider value={{ ...cartData, addCart, subCart, clearCart }}>
       <Search onFilter={filterData} />
       <Meal mealData={mealData} />
-      <BottomBar />
+      <BottomBar onShowCheckout={showCheckoutHandler} />
+      {showCheckout ? <Checkout onHideCheckout={hideCheckoutHandler} /> : null}
     </CartContext.Provider>
   )
 }
