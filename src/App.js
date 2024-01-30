@@ -102,8 +102,17 @@ const App = () => {
     setCartData(newCart)
   }
 
+  // 清空购物车
+  const clearCart = () => {
+    setCartData({
+      cart: [],
+      totalAmount: 0,
+      totalPrice: 0,
+    })
+  }
+
   return (
-    <CartContext.Provider value={{ ...cartData, addCart, subCart }}>
+    <CartContext.Provider value={{ ...cartData, addCart, subCart, clearCart }}>
       <Search onFilter={filterData} />
       <Meal mealData={mealData} />
       <BottomBar />
