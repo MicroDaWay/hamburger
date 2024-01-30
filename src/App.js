@@ -67,6 +67,14 @@ const App = () => {
     totalPrice: 0,
   })
 
+  // 搜索框过滤数据
+  const filterData = (keyword) => {
+    const newMealData = MEAL_DATA.filter(
+      (item) => item.title.includes(keyword) || item.desc.includes(keyword)
+    )
+    setMealData(newMealData)
+  }
+
   // 向购物车中添加商品
   const addCart = (newItem) => {
     const newCart = { ...cartData }
@@ -95,7 +103,7 @@ const App = () => {
 
   return (
     <CartContext.Provider value={{ addCart, subCart }}>
-      <Search />
+      <Search onFilter={filterData} />
       <Meal mealData={mealData} />
     </CartContext.Provider>
   )
