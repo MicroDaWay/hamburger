@@ -9,8 +9,12 @@ const MealItem = (props) => {
       </div>
       <div className={classes.details}>
         <div className={classes['meal-name']}>{props.item.title}</div>
-        <div className={classes.desc}>{props.item.desc}</div>
-        <div className={classes['price-count']}>
+        {props.haveDesc ? <div className={classes.desc}>{props.item.desc}</div> : null}
+        <div
+          className={
+            props.haveDesc ? classes['price-count'] : `${classes['price-count']} ${classes.top}`
+          }
+        >
           <span className={classes.price}>{props.item.price}</span>
           <Counter item={props.item} />
         </div>

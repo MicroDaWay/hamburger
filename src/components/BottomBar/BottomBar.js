@@ -1,13 +1,22 @@
 import classes from './BottomBar.module.css'
 import Bag from '../../assets/bag.png'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import CartContext from '../../store/CartContext'
+import CartDetails from '../CartDetails/CartDetails'
 
 const BottomBar = () => {
+  // 是否显示购物车详情
+  const [showCartDetails, setShowCartDetails] = useState(false)
   const cartContext = useContext(CartContext)
 
+  const clickBottomBar = () => {
+    if (cartContext.totalAmount) {
+      setShowCartDetails((prevState) => !prevState)
+    }
+  }
+
   return (
-    <div className={classes['bottom-bar']}>
+    <div onClick={clickBottomBar} className={classes['bottom-bar']}>
       <div className={classes['bag-box']}>
         <img src={Bag} alt="bag" />
         {cartContext.totalAmount ? (
@@ -22,6 +31,7 @@ const BottomBar = () => {
       <div className={cartContext.totalPrice ? classes['checkout'] : classes['no-checkout']}>
         去结算
       </div>
+      {showCartDetails ? <CartDetails /> : null}
     </div>
   )
 }

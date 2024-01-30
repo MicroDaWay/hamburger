@@ -1,0 +1,37 @@
+.cart-details {
+  position: fixed;
+  width: 100%;
+  max-height: 1300rem;
+  border-top-left-radius: 40rem;
+  border-top-right-radius: 40rem;
+  bottom: 0;
+  background-color: #fff;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rem;
+  height: 100rem;
+}
+
+.top-text {
+  font-size: 36rem;
+  font-weight: bold;
+}
+
+.clear-box {
+  color: #666;
+}
+
+.clear-text {
+  margin-left: 20rem;
+}
+
+.meal {
+  padding: 0 20rem;
+  max-height: 1200rem;
+  overflow: auto;
+  padding-bottom: 180rem;
+}

@@ -9,6 +9,13 @@
   width: 250rem;
 }
 
+.details {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  flex: auto;
+}
+
 .meal-name {
   font-size: 36rem;
 }
@@ -21,6 +28,10 @@
   display: flex;
   justify-content: space-between;
   margin-top: 20rem;
+}
+
+.top {
+  margin-top: 40rem;
 }
 
 .price {
