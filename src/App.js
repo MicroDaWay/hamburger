@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
 import CartContext from './store/CartContext'
+import BottomBar from './components/BottomBar/BottomBar'
 
 // 商品数据
 const MEAL_DATA = [
@@ -102,9 +103,10 @@ const App = () => {
   }
 
   return (
-    <CartContext.Provider value={{ addCart, subCart }}>
+    <CartContext.Provider value={{ ...cartData, addCart, subCart }}>
       <Search onFilter={filterData} />
       <Meal mealData={mealData} />
+      <BottomBar />
     </CartContext.Provider>
   )
 }

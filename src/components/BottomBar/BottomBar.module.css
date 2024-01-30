@@ -1,0 +1,77 @@
+.bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 50rem;
+  width: 700rem;
+  height: 100rem;
+  background-color: #383838;
+  border-radius: 60rem;
+}
+
+.bag-box {
+  position: absolute;
+  bottom: -10rem;
+  width: 100rem;
+}
+
+.total-amount-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: -20rem;
+  width: 40rem;
+  height: 40rem;
+  border-radius: 50%;
+  background-color: #cb0d0e;
+  color: #fff;
+  font-size: 26rem;
+}
+
+.total-price {
+  font-size: 40rem;
+  font-weight: bold;
+  color: #fff;
+  margin-left: 130rem;
+}
+
+.total-price::before {
+  content: '￥';
+  font-size: 28rem;
+}
+
+.no-meal {
+  color: #98928d;
+  font-size: 40rem;
+  margin-left: 130rem;
+  font-weight: bold;
+}
+
+.checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0b600;
+  width: 230rem;
+  height: 100%;
+  border-radius: 60rem;
+  font-size: 44rem;
+}
+
+.no-checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6c6b6b;
+  color: #98928d;
+  width: 230rem;
+  height: 100%;
+  border-radius: 60rem;
+  font-size: 44rem;
+}

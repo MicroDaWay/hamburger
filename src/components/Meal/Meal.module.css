@@ -1,5 +1,6 @@
 .meal {
   padding: 0 20rem;
+  padding-bottom: 180rem;
   height: calc(100vh - 120rem);
   overflow: auto;
 }
