@@ -1,8 +1,8 @@
 import { useState } from 'react'
+import BottomBar from './components/BottomBar/BottomBar'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
 import CartContext from './store/CartContext'
-import BottomBar from './components/BottomBar/BottomBar'
 
 // 商品数据
 const MEAL_DATA = [
