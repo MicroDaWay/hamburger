@@ -130,7 +130,7 @@ const App = () => {
     if (cartData.totalAmount === 0) {
       setShowCheckout(false)
     }
-  })
+  }, [cartData])
 
   return (
     <CartContext.Provider value={{ ...cartData, addCart, subCart, clearCart }}>

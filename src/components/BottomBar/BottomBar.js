@@ -30,7 +30,7 @@ const BottomBar = (props) => {
     if (cartContext.totalAmount === 0) {
       setShowCartDetails(false)
     }
-  })
+  }, [cartContext])
 
   return (
     <div onClick={clickBottomBar} className={classes['bottom-bar']}>
