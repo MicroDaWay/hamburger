@@ -24,7 +24,9 @@ const CartDetails = (props) => {
 
   // 点击确认的处理逻辑
   const confirmHandler = () => {
-    cartContext.clearCart()
+    cartContext.cartDispatch({
+      type: 'CLEAR_CART',
+    })
     setConfirmModal(false)
   }
 

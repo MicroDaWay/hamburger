@@ -9,12 +9,18 @@ const Counter = (props) => {
 
   // 点击增加的处理函数
   const addHandler = () => {
-    cartContext.addCart(props.item)
+    cartContext.cartDispatch({
+      type: 'ADD_CART',
+      newItem: props.item,
+    })
   }
 
   // 点击减少的处理函数
   const subHandler = () => {
-    cartContext.subCart(props.item)
+    cartContext.cartDispatch({
+      type: 'SUB_CART',
+      newItem: props.item,
+    })
   }
 
   return (

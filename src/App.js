@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import BottomBar from './components/BottomBar/BottomBar'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
@@ -58,12 +58,44 @@ const MEAL_DATA = [
   },
 ]
 
+const cartReducer = (state, action) => {
+  const newCart = { ...state }
+  switch (action.type) {
+    case 'ADD_CART':
+      const item = newCart.cart.find((item) => item.id === action.newItem.id)
+      if (!item) {
+        action.newItem.amount = 0
+        newCart.cart.push(action.newItem)
+      }
+      action.newItem.amount++
+      newCart.totalAmount += 1
+      newCart.totalPrice += action.newItem.price
+      return newCart
+    case 'SUB_CART':
+      action.newItem.amount--
+      if (action.newItem.amount <= 0) {
+        newCart.cart = newCart.cart.filter((item) => item.id !== action.newItem.id)
+      }
+      newCart.totalAmount -= 1
+      newCart.totalPrice -= action.newItem.price
+      return newCart
+    case 'CLEAR_CART':
+      newCart.cart.forEach((item) => (item.amount = 0))
+      newCart.cart = []
+      newCart.totalAmount = 0
+      newCart.totalPrice = 0
+      return newCart
+    default:
+      return state
+  }
+}
+
 const App = () => {
   // 商品数据
   const [mealData, setMealData] = useState(MEAL_DATA)
 
   // 购物车数据
-  const [cartData, setCartData] = useState({
+  const [cartData, cartDispatch] = useReducer(cartReducer, {
     cart: [],
     totalAmount: 0,
     totalPrice: 0,
@@ -72,12 +104,12 @@ const App = () => {
   // 是否显示结算页
   const [showCheckout, setShowCheckout] = useState(false)
 
-  // 显示结算页
+  // 显示结算页的处理函数
   const showCheckoutHandler = () => {
     setShowCheckout(true)
   }
 
-  // 隐藏结算页
+  // 隐藏结算页的处理函数
   const hideCheckoutHandler = () => {
     setShowCheckout(false)
   }
@@ -90,42 +122,6 @@ const App = () => {
     setMealData(newMealData)
   }
 
-  // 向购物车中添加商品
-  const addCart = (newItem) => {
-    const newCart = { ...cartData }
-    const item = newCart.cart.find((item) => item.id === newItem.id)
-    if (!item) {
-      newItem.amount = 0
-      newCart.cart.push(newItem)
-    }
-    newItem.amount++
-    newCart.totalAmount += 1
-    newCart.totalPrice += newItem.price
-    setCartData(newCart)
-  }
-
-  // 从购物车中移除商品
-  const subCart = (newItem) => {
-    const newCart = { ...cartData }
-    newItem.amount--
-    if (newItem.amount <= 0) {
-      newCart.cart = newCart.cart.filter((item) => item.id !== newItem.id)
-    }
-    newCart.totalAmount -= 1
-    newCart.totalPrice -= newItem.price
-    setCartData(newCart)
-  }
-
-  // 清空购物车
-  const clearCart = () => {
-    const newCart = { ...cartData }
-    newCart.cart.forEach((item) => (item.amount = 0))
-    newCart.cart = []
-    newCart.totalAmount = 0
-    newCart.totalPrice = 0
-    setCartData(newCart)
-  }
-
   useEffect(() => {
     if (cartData.totalAmount === 0) {
       setShowCheckout(false)
@@ -133,7 +129,7 @@ const App = () => {
   }, [cartData])
 
   return (
-    <CartContext.Provider value={{ ...cartData, addCart, subCart, clearCart }}>
+    <CartContext.Provider value={{ ...cartData, cartDispatch }}>
       <Search onFilter={filterData} />
       <Meal mealData={mealData} />
       <BottomBar onShowCheckout={showCheckoutHandler} />
