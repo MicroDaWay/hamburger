@@ -14,7 +14,7 @@ const CartDetails = (props) => {
   const cartContext = useContext(CartContext)
 
   const mealItem = cartContext.cart.map((item) => (
-    <MealItem haveDesc={false} item={item} key={item.id} />
+    <MealItem checkout={false} haveDesc={false} item={item} key={item.id} />
   ))
 
   // 点击取消的处理逻辑

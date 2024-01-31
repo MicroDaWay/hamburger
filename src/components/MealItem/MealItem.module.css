@@ -4,6 +4,10 @@
   border-bottom: 1px solid #eee;
 }
 
+.meal-item:last-child {
+  border-bottom: none;
+}
+
 .img-box {
   flex-shrink: 0;
   width: 250rem;
