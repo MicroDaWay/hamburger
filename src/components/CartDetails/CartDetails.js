@@ -26,7 +26,6 @@ const CartDetails = (props) => {
   const confirmHandler = () => {
     cartContext.clearCart()
     setConfirmModal(false)
-    props.onHideCartDetails()
   }
 
   // 点击清空购物车按钮的处理函数

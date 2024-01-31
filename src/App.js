@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BottomBar from './components/BottomBar/BottomBar'
 import Meal from './components/Meal/Meal'
 import Search from './components/Search/Search'
@@ -125,6 +125,12 @@ const App = () => {
     newCart.totalPrice = 0
     setCartData(newCart)
   }
+
+  useEffect(() => {
+    if (cartData.totalAmount === 0) {
+      setShowCheckout(false)
+    }
+  })
 
   return (
     <CartContext.Provider value={{ ...cartData, addCart, subCart, clearCart }}>

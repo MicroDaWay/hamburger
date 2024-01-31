@@ -1,6 +1,6 @@
 import classes from './BottomBar.module.css'
 import Bag from '../../assets/bag.png'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CartContext from '../../store/CartContext'
 import CartDetails from '../CartDetails/CartDetails'
 
@@ -18,11 +18,6 @@ const BottomBar = (props) => {
     setShowCartDetails((prevState) => !prevState)
   }
 
-  // 隐藏购物车详情
-  const hideCartDetailsHandler = () => {
-    setShowCartDetails(false)
-  }
-
   // 点击去结算的处理函数
   const checkoutHandler = (e) => {
     e.stopPropagation()
@@ -30,6 +25,12 @@ const BottomBar = (props) => {
       props.onShowCheckout()
     }
   }
+
+  useEffect(() => {
+    if (cartContext.totalAmount === 0) {
+      setShowCartDetails(false)
+    }
+  })
 
   return (
     <div onClick={clickBottomBar} className={classes['bottom-bar']}>
@@ -50,7 +51,7 @@ const BottomBar = (props) => {
       >
         去结算
       </div>
-      {showCartDetails ? <CartDetails onHideCartDetails={hideCartDetailsHandler} /> : null}
+      {showCartDetails ? <CartDetails /> : null}
     </div>
   )
 }
